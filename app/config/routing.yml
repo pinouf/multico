@@ -1,0 +1,18 @@
+oauth_register:
+    pattern: /oauthRegister
+    defaults: { _controller: AcmeMainBundle:Security:oauthRegister }
+
+
+
+# app/config/routing.yml
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+# app/config/routing.yml
+facebook_login:
+    pattern: /login/check-facebook
