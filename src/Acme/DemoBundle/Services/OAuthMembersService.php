@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Acme\MainBundle\Security\OAuthUser;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class OAuthMembersService implements UserProviderInterface, OAuthAwareUserProviderInterface {
 

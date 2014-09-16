@@ -78,8 +78,8 @@ hwi_oauth:
             client_secret: "ceda556f412a88be5b490614cded5470"
         google:
             type:                google
-            client_id:           "841081739248782"
-            client_secret:       "ceda556f412a88be5b490614cded5470"
+            client_id:           "932091143532-qr2tntottl1lllseetfed8qdr6v5ukms.apps.googleusercontent.com"
+            client_secret:       "Rvkbvg6D2EtmyzL--dtmzf_k"
 
 
 services:
