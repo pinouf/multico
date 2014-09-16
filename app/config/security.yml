@@ -13,8 +13,10 @@ security:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
-        oauth:
-            id: my_oauth_members
+        #oauth:
+            #id: my_oauth_members
+        hwi:                               
+            id: hwi_oauth.user.provider
 
     firewalls:
         dev:
