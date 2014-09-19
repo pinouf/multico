@@ -1,6 +1,6 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -17,6 +17,9 @@ security:
             #id: my_oauth_members
         hwi:                               
             id: hwi_oauth.user.provider
+
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
@@ -43,18 +46,31 @@ security:
             anonymous: ~
             oauth:
                 resource_owners:
-                    facebook:           "/login/check-facebook"
-                    google:             "/login/check-google"
-                login_path:        /login
+                    facebook:           "/tata/check-facebook"
+                    google:             "/tata/check-google"
+                login_path:        /tata
                 use_forward:       false
-                failure_path:      /login
-
+                failure_path:      /tata
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.entity
+
+        main:
+            pattern: ^/toto
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                default_target_path: /toto
+            logout:       true
+            anonymous:    true
+
 
 
 
     access_control:
+        - { path: ^/toto/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/tata, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ˆ/oauth/target, roles: ROLE_OAUTH_USER }
         - { path: ˆ/oauth/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
