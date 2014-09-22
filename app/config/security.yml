@@ -42,36 +42,54 @@ security:
             #http_basic:
             #    realm: "Secured Demo Area"
 
-        secured_area:
-            anonymous: ~
-            oauth:
-                resource_owners:
-                    facebook:           "/tata/check-facebook"
-                    google:             "/tata/check-google"
-                login_path:        /tata
-                use_forward:       false
-                failure_path:      /tata
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.entity
+        #secured_area:
+        #    anonymous: ~
+        #    oauth:
+        #        resource_owners:
+        #            facebook:           "/tata/check-facebook"
+        #            google:             "/tata/check-google"
+        #        login_path:        /tata
+        #        use_forward:       false
+        #        failure_path:      /tata
+        #        oauth_user_provider:
+        #            service: hwi_oauth.user.provider.entity
 
-        main:
-            pattern: ^/toto
+
+        login_social:
+            pattern:    ^/tata$
+            security: false
+            anonymous:    true
+
+        secured_area:
+            pattern:    ^/
             form_login:
                 provider: fos_userbundle
+                login_path: /login
+                check_path: /login_check
                 csrf_provider: form.csrf_provider
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-                default_target_path: /toto
             logout:       true
             anonymous:    true
 
+            oauth:
+                resource_owners:
+                    google:             "/login/check-google"
+                    facebook:           "/login/check-facebook"
+                login_path:        /login
+                failure_path:      /login
 
-
+                # FOSUB integration
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider
 
     access_control:
         - { path: ^/toto/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/tata/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        
         - { path: ^/tata, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ˆ/oauth/target, roles: ROLE_OAUTH_USER }
         - { path: ˆ/oauth/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
