@@ -19,7 +19,7 @@ security:
             id: hwi_oauth.user.provider
 
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         dev:
@@ -79,7 +79,8 @@ security:
 
                 # FOSUB integration
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider
+                    #service: hwi_oauth.user.provider
+                    service: my_user_provider
 
     access_control:
         - { path: ^/toto/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }

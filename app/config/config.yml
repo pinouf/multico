@@ -71,6 +71,13 @@ swiftmailer:
 hwi_oauth:
     firewall_name: secured_area
 
+    fosub:
+        username_iterations: 30
+        properties:
+        # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            google: google_id
+
     resource_owners:
         facebook:
             type: facebook

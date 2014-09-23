@@ -4,6 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+
+    <parameters>
+        <parameter key="my_user_provider.class">Acme\DemoBundle\Security\FOSUBUserProvider</parameter>
+    </parameters>
+
     <services>
         <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
             <tag name="twig.extension" />
@@ -14,5 +19,14 @@
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
             <argument type="service" id="twig.extension.acme.demo" />
         </service>
+
+        <service id="my_user_provider" class="%my_user_provider.class%">
+            <argument type="service" id="fos_user.user_manager"/>
+            <argument type="collection">
+            <argument key="facebook">facebook_id</argument>
+            <argument key="google">google_id</argument>
+            </argument>
+        </service>
     </services>
+
 </container>
